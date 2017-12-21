@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "math"
+    "runtime"
 )
 
 type person struct {
@@ -133,8 +134,90 @@ func (c Color) String() string {
     return strings[c]
 }
 
+type Human struct {
+    name string
+    age int
+    phone string
+}
+
+type Student struct {
+    Human 
+    school string
+}
+
+type Employee struct {
+    Human 
+    company string
+}
+
+func (h *Human) SayHi() {
+    fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
+}
+
+func (e *Employee) SayHi() {
+    fmt.Printf("Hi, I am %s , I work at %s, you can call me on %s\n", e.name, e.company, e.phone)
+}
+
+func say(s string) {
+    for i := 0; i < 5; i++ {
+        runtime.Gosched()
+        fmt.Println(s)
+    }
+}
 func main() {
-    //getSum()
+    go say("world")
+    say("hello")
+
+
+
+
+
+/**
+* 2.5.1
+*
+    r1 := Rectangle{12, 2}
+    r2 := Rectangle{9, 4}
+    c1 := Circle{10}
+    c2 := Circle{25}
+
+    fmt.Println("Area of r1 is : ", r1.area())
+    fmt.Println("Area of r2 is : ", r2.area())
+    fmt.Println("Area of c1 is : ", c1.area())
+    fmt.Println("Area of c2 is : ", c2.area())
+*/
+
+/**
+* 2.5.2
+*
+boxes := BoxList {
+    Box{4, 4, 4, RED},
+    Box{4, 4, 4, RED},
+    Box{4, 4, 4, RED},
+    Box{4, 4, 4, RED},
+    Box{4, 4, 4, RED},
+    Box{4, 4, 4, RED},
+}
+
+fmt.Printf("We have %d boxes in our set\n", len(boxes))
+fmt.Println("The volume of the first one is", boxes[0].Volume(), "cm3")
+fmt.Println("The color of the last one is", boxes[len(boxes)-1].color.String())
+fmt.Println("The biggest one if ", boxes.BiggestColor().String())
+fmt.Println("Let's paint them all black")
+boxes.PaintItBlack()
+fmt.Println("The color of the second one is", boxes[1].color.String())
+fmt.Println("Obviously, now, the biggest one is", boxes.BiggestColor().String())
+*/
+
+/**
+* 2.5.2
+    mark := Student{Human{"Mark", 25, "222-222-YYYY"}, "MIT"}
+    sam := Employee{Human{"Sam", 45, "111-888-XXX"}, "Golang Inc"}
+
+    mark.SayHi()
+    sam.SayHi()
+*/
+
+        //getSum()
 
 
 /**
@@ -196,36 +279,4 @@ func main() {
 
     fmt.Println("hello world!")
 */
-
-/**
-* 2.5.1
-*
-    r1 := Rectangle{12, 2}
-    r2 := Rectangle{9, 4}
-    c1 := Circle{10}
-    c2 := Circle{25}
-
-    fmt.Println("Area of r1 is : ", r1.area())
-    fmt.Println("Area of r2 is : ", r2.area())
-    fmt.Println("Area of c1 is : ", c1.area())
-    fmt.Println("Area of c2 is : ", c2.area())
-*/
-
-boxes := BoxList {
-    Box{4, 4, 4, RED},
-    Box{4, 4, 4, RED},
-    Box{4, 4, 4, RED},
-    Box{4, 4, 4, RED},
-    Box{4, 4, 4, RED},
-    Box{4, 4, 4, RED},
-}
-
-fmt.Printf("We have %d boxes in our set\n", len(boxes))
-fmt.Println("The volume of the first one is", boxes[0].Volume(), "cm3")
-fmt.Println("The color of the last one is", boxes[len(boxes)-1].color.String())
-fmt.Println("The biggest one if ", boxes.BiggestColor().String())
-fmt.Println("Let's paint them all black")
-boxes.PaintItBlack()
-fmt.Println("The color of the second one is", boxes[1].color.String())
-fmt.Println("Obviously, now, the biggest one is", boxes.BiggestColor().String())
 }
