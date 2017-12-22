@@ -14,5 +14,6 @@ func serverLib() {
 }
 
 func main() {
-	serverLib();
+	//serverLib();
+	glog.Info("Prepare to repel boarders")
 }
